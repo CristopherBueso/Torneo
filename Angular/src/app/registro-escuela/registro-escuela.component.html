@@ -1,0 +1,58 @@
+<div class="container text-center my-3">
+    <div class="row">
+        <div class="col-md-4 col-sm-12 my-3">
+            <div class="my-3 bg-light">
+                <h2>Registro de Escuela</h2>
+                <form (ngSubmit)="registrar()">
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Nombre Escuela</label>
+                        <input type="text" class="form-control" id="nombreEscuela" name="nombreEscuela" [(ngModel)]="escuela.nombre">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Nombre del Sensei</label>
+                        <input type="text" class="form-control" id="nombreEscuela" name="nombreSensei" [(ngModel)]="escuela.nombreSensei">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Apellido del Sensei</label>
+                        <input type="text" class="form-control" id="nombreEscuela" name="apellidoSensei" [(ngModel)]="escuela.apellidoSensei">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Telefono</label>
+                        <input type="text" class="form-control" id="nombreEscuela" name="telefono" [(ngModel)]="escuela.telefono">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Foto</label>
+                        <input type="file" id="theImageFile" capture="user" accept="image/*">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                </form>
+            </div>
+        </div>
+        <div class="col-md-8 col-sm-12 bg-light">
+            <h2>Escuelas</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Codigo</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col" colspan="2">Sensei</th>
+                        <th scope="col">Telefono</th>
+                        <th scope="col">Funcion</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let escuela of escs">
+                        <th scope="row">{{escuela.id}}</th>
+                        <td>{{escuela.nombre}}</td>
+                        <td>{{escuela.nombreSensei}}</td>
+                        <td>{{escuela.apellidoSensei}}</td>
+                        <td>{{escuela.telefono}}</td>
+                        <td>
+                            <!-- <button type="button" class="btn btn-info">Editar</button>--><button type="button" class="btn btn-danger" (click)="eliminar(escuela.id)">Eliminar</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

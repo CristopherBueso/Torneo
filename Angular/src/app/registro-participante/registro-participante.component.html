@@ -1,0 +1,77 @@
+<div class="container text-center my-3">
+    <h2>Registro de Participante</h2>
+    <hr>
+    <div class="row bg-light">
+        <div class="col-md-4 col-sm-12 my-3">
+            <h2>Datos Participante</h2>
+            <form (ngSubmit)="registrar();">
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Nombre</label>
+                    <input type="text" class="form-control" id="nombre" name="nombre" [(ngModel)]="participante.nombre">
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Apellido</label>
+                    <input type="text" class="form-control" id="apellido" name="apellido" [(ngModel)]="participante.apellido">
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Edad</label>
+                    <input type="text" class="form-control" id="edad" name="edad" [(ngModel)]="participante.edad">
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Escuela</label>
+                    <select class="form-select" aria-label="Default select example" name="escuelaId" [(ngModel)]="participante.escuelaId">
+                        <option *ngFor="let escuela of escs" [value]="escuela.id">{{escuela.nombre}}</option>
+                      </select>
+                </div>
+                <div class="mb-3">
+                    <label for="formFileSm" class="form-label">Foto del Peleador</label>
+                    <input class="form-control form-control-sm" id="formFileSm" type="file" (change)="getFile($event)">
+                </div>
+                <button type="submit" class="btn btn-primary">Guardar</button>
+            </form>
+        </div>
+        <div class="col-md-8 col-sm-12">
+            <h2>Categorias</h2>
+            <div class="container  my-3">
+                <div class="form-check form-check-inline col-md-3" *ngFor="let item of checkboxesDataList">
+                    <input type="checkbox" class="form-check-input" [(ngModel)]="item.isChecked" (change)="changeSelection()" id="ch{{item.id}}">
+                    <label class="form-check-label" for="ch{{item.id}}"> {{item.codigo}}</label>
+                </div>
+                <!-- <div class="row row-cols-4">
+                    <div class="form-check form-check-inline" *ngFor="let item of checkboxesDataList">
+                        <input type="checkbox" class="form-check-input" [(ngModel)]="item.isChecked" (change)="changeSelection()" id="ch{{item.id}}">
+                        <label class="form-check-label" for="ch{{item.id}}"> {{item.codigo}}</label>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="row bg-light">
+        <div class="col-md-12">
+            <h2>Participantes</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Codigo</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Apellido</th>
+                        <th scope="col">Edad</th>
+                        <th scope="col">Escuela</th>
+                        <th scope="col">Funcion</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let participante of parts">
+                        <th scope="row">{{participante.id}}</th>
+                        <td>{{participante.nombre}}</td>
+                        <td>{{participante.apellido}}</td>
+                        <td>{{participante.edad}}</td>
+                        <td>{{participante.escuela.nombre}}</td>
+                        <td><button type="button" class="btn btn-danger">Eliminar</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

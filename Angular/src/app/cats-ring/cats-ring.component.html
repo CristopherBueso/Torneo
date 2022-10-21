@@ -1,0 +1,92 @@
+<h1>
+    <p class="text-center">Ring {{ring}}</p>
+</h1>
+<div class="row d-flex justify-content-center">
+    <div class="col-md-4 col-sm-12 my-3 bg-light" *ngIf="!completo">
+        <h1>
+            <p style="text-align: center;">categoria</p>
+        </h1>
+        <div class="container">
+            <button *ngFor="let i of cat" type="button" class="btn btn-outline-primary btn-sm m- 1" (click)="seleccionarCategoria(i.codigo)">{{i.codigo}}</button>
+        </div>
+        <h1>
+            <p style="text-align: center;">Participantes</p>
+        </h1>
+        <hr>
+        <table class="table row-border hover">
+            <thead>
+                <tr>
+                    <th colspan="2" class="text-center">Nombre</th>
+                    <th class="text-center">Categoria</th>
+                    <th class="text-center">Escuela</th>
+                    <th class="text-center"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let ins of insx; let i = index">
+                    <td class="text-center">{{ ins.participante.nombre }}</td>
+                    <td class="text-center">{{ ins.participante.apellido }}</td>
+                    <td class="text-center">{{ ins.tipoPelea.codigo }}</td>
+                    <td class="text-center">{{ ins.participante.escuela.nombre }}</td>
+                    <td class="text-center"><button type="button" class="btn btn-warning" (click)="seleccionar(i)">Seleccionar</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-8 col-sm-12 my-3 bg-light" *ngIf="!peleando">
+        <h1>
+            <p style="text-align: center;">Combate</p>
+        </h1>
+        <hr>
+        <div class="row">
+            <div class="col-md-6 " *ngFor="let peleador of peleadores; let i = index">
+                <div class="card">
+                    <h5 class="card-header text-center">Participante {{i+1}}</h5>
+                    <div class="card-body">
+                        <img class="card-img-top" src="./assets/img/peleadorL.jpg" alt="Card image cap" *ngIf="i==0">
+                        <img class="card-img-top" src="./assets/img/peleadorR.jpg" alt="Card image cap" *ngIf="i==1">
+                        <h5 class="card-title text-center">{{peleador.participante.nombre}} {{peleador.participante.apellido}}</h5>
+                        <p class="card-text text-center">{{peleador.participante.escuela.nombre}}</p>
+                        <p class="card-text text-center">{{peleador.tipoPelea.codigo}}</p>
+                        <button type="button" class="btn btn-warning" (click)="deselect(i)">Deseleccionar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-8 col-sm-12 my-3 bg-light" *ngIf="peleando">
+        <h1>
+            <p style="text-align: center;">Combate</p>
+        </h1>
+        <hr>
+        <div class="row" *ngFor="let evento of evs">
+            <div class="col-md-6">
+                <div class="card mx-auto">
+                    <img src="./assets/img/peleadorL.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <p class="card-text"><strong>{{evento.inscripcion1.participante.nombre}} {{evento.inscripcion1.participante.apellido}}</strong></p>
+                        <p class="card-text"><strong>{{evento.inscripcion1.tipoPelea.codigo}}</strong></p>
+                        <p class="card-text"><strong>{{evento.inscripcion1.participante.escuela.nombre}}</strong></p>
+                        <a class="btn btn-info" *ngIf="peleando" (click)="ganador(evento.inscripcion1.id)">Ganador</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card mx-auto">
+                    <img src="./assets/img/peleadorR.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <p class="card-text"><strong>{{evento.inscripcion2.participante.nombre}} {{evento.inscripcion2.participante.apellido}}</strong></p>
+                        <p class="card-text"><strong>{{evento.inscripcion2.tipoPelea.codigo}}</strong></p>
+                        <p class="card-text"><strong>{{evento.inscripcion2.participante.escuela.nombre}}</strong></p>
+                        <a class="btn btn-info" *ngIf="peleando" (click)="ganador(evento.inscripcion2.id)">Ganador</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-8 col-sm-12 my-3 bg-light justify-content-center" *ngIf="completo">
+        <div class="row" *ngIf="!peleando">
+            <button type="button" class="btn btn-success" (click)="aPelear()">A pelear!</button>
+        </div>
+    </div>
+</div>
