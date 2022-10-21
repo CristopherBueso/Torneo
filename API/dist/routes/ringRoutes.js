@@ -1,0 +1,11 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const ringController_1 = require("../controllers/ringController");
+const router = (0, express_1.Router)();
+router.get("/inscripciones", ringController_1.obtenerInscripciones);
+// router.get("/escuela/:id", obtenerEscuela);
+// router.post("/escuela", crearEscuela);
+// router.put("/escuela/:id", modificarEscuela);
+// router.delete("/escuela/:id", eliminarEscuela);
+exports.default = router;
